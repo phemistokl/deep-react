@@ -26,6 +26,7 @@ var NoteEditor = React.createClass({
         };
 
         this.props.onNoteAdd(newNote);
+        this.setState({ text: ''});
     },
 
     render: function() {
@@ -47,12 +48,19 @@ var NoteEditor = React.createClass({
 var NotesGrid = React.createClass({
     componentDidMount: function() {
         var grid = this.refs.grid;
-        var msnry = new Masonry( grid, {
+        this.msnry = new Masonry( grid, {
             itemSelector: '.note',
             columnWidth: 200,
             gutter: 10,
             isFitWidth: true
         });
+    },
+
+    componentDidUpdate: function(prevProps) {
+        if (this.props.notes.length !== prevProps.notes.length) {
+            this.msnry.reloadItems();
+            this.msnry.layout();
+        }
     },
 
     render: function() {
