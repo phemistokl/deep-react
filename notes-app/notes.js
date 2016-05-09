@@ -157,7 +157,7 @@ var NotesApp = React.createClass({
             var searchValue = note.text.toLowerCase();
             return searchValue.indexOf(searchQuery) !== -1;
         });
-        this.setState({ notes: filteredNotes });
+        this.setState({ filteredNotes: filteredNotes });
     },    
 
     render: function() {
