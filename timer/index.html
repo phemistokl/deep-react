@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="mount-point"></div>
+	
+	<script type="text/babel">
+		var Timer = React.createClass({
+			getInitialState: function() {
+				return {
+					seconds: 0,
+					isPaused: false
+				};
+			},
+
+			componentDidMount: function() {
+				this.timer = setInterval(this.tick, 1000);
+			},
+
+			tick: function() {
+				this.setState({ seconds: this.state.seconds + 1 })
+			},
+
+			toggleTimer: function() {
+				this.setState({ isPaused: !this.state.isPaused });
+				if( !this.state.isPaused ) {
+					clearInterval(this.timer);
+				} else {
+					this.timer = setInterval(this.tick, 1000);
+				}
+			},
+
+			restartCharacters: function() {
+					this.setState({ seconds: 0 });
+			},
+
+			componentWillUnmount: function() {
+					clearInterval(this.timer);
+			},
+
+			render: function() {
+				return (
+					<div>
+					<div className="button-box">
+					<div role="button" onClick={this.toggleTimer} className="play btn">{this.state.isPaused ? <img src='pause.jpg' /> : <img src='play.jpg' /> }</div><div className="mynumber">{this.state.seconds}</div>
+					<div role="button" onClick={this.restartCharacters} className="restart btn"><img src='restart.jpg' /></div>
+					</div>
+					</div>
+				);
+			}
+ 		});
+
+ 		ReactDOM.render(
+ 			<Timer />,
+ 			document.getElementById('mount-point')
+ 		);
+	</script>
+</body>
+</html>

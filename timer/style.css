@@ -1,0 +1,60 @@
+.contacts {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.search-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.contacts-list {
+  padding: 0;
+  width: 100%;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px dotted grey;
+  cursor: pointer;
+}
+
+.contact-image {
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.contact-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-number {
+  font-size: 18px;
+  color: grey;
+}
+.btn {
+  cursor: pointer;
+  display: inline-block;
+}
+.btn img {
+  display: block;
+}
+.mynumber {
+  display: inline-block;
+  height: 98px;
+  line-height: 98px;
+  font-size: 130px;
+  color: #000000;
+  font-family: Arial;
+  min-width: 300px;
+  text-align: center;
+
+}
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, Inc. Terms Privacy Security Contact Help

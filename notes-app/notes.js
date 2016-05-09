@@ -1,3 +1,11 @@
+var NoteSearch = React.createClass({
+    render: function() {
+        return (
+            <input type="text" className="search-field" onChange={this.props.onSearch} />
+            );
+    }
+});
+
 var NoteColor = React.createClass({
     render: function() {
         var colorRed = { backgroundColor: "#ff8a80" };
@@ -143,10 +151,20 @@ var NotesApp = React.createClass({
         this.setState({ notes: newNotes });
     },
 
+    handleNoteSearch: function(event) {
+        var searchQuery = event.target.value.toLowerCase();
+        var filteredNotes = this.state.notes.filter(function(note) {
+            var searchValue = note.text.toLowerCase();
+            return searchValue.indexOf(searchQuery) !== -1;
+        });
+        this.setState({ notes: filteredNotes });
+    },    
+
     render: function() {
         return (
             <div className="notes-app">
             <h2 className="app-header">NotesApp</h2>
+            <NoteSearch onSearch={this.handleNoteSearch}/>
             <NoteEditor onNoteAdd={this.handleNoteAdd} />
             <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
             </div>
