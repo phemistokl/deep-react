@@ -1,3 +1,22 @@
+var NoteColor = React.createClass({
+    render: function() {
+        var colorRed = { backgroundColor: "#ff8a80" };
+        var colorYellow = { backgroundColor: "#ffff8d" };
+        var colorGray = { backgroundColor: "#cfd8dc" };
+        var colorBlue = { backgroundColor: "#80d8ff" };
+        var colorGreen = { backgroundColor: "#ccff90" };
+        return (
+            <div className="colorize-block" onClick={this.props.onColorAdd}>
+                <div role="button" className="btn-red colorize" style={ colorRed }></div>
+                <div role="button" className="btn-yellow colorize" style={ colorYellow }></div>
+                <div role="button" className="btn-gray colorize" style={ colorGray }></div>
+                <div role="button" className="btn-blue colorize" style={ colorBlue }></div>
+                <div role="button" className="btn-green colorize" style={ colorGreen }></div>
+            </div>
+            );
+    }
+});
+
 var Note = React.createClass({
     render: function() {
         var style = { backgroundColor: this.props.color };
@@ -16,6 +35,10 @@ var NoteEditor = React.createClass({
         };
     },
 
+    handleColorChange: function(event) {
+        this.setState({ color: event.target.style.backgroundColor });
+    },
+
     handleTextChange: function(event) {
         this.setState({ text: event.target.value });
     },
@@ -23,7 +46,7 @@ var NoteEditor = React.createClass({
     handleNoteAddus: function() {
         var newNote = {
             text: this.state.text,
-            color: 'yellow',
+            color: this.state.color,
             id: Date.now()
         };
 
@@ -41,6 +64,7 @@ var NoteEditor = React.createClass({
                         value={this.state.text}
                         onChange={this.handleTextChange}
                     />
+                    <NoteColor onColorAdd={this.handleColorChange}/>
                     <button className="add-button" onClick={this.handleNoteAddus}>Add</button>
                 </div>
             );
@@ -122,7 +146,7 @@ var NotesApp = React.createClass({
     render: function() {
         return (
             <div className="notes-app">
-            NotesApp
+            <h2 className="app-header">NotesApp</h2>
             <NoteEditor onNoteAdd={this.handleNoteAdd} />
             <NotesGrid notes={this.state.notes} onNoteDelete={this.handleNoteDelete} />
             </div>
